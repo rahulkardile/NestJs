@@ -27,7 +27,7 @@ export class UsersController {
   //     return [];
   //   }
 
-  constructor(private readonly usersService: UsersService){}
+  constructor(private readonly usersService: UsersService) {}
 
   @Get() //GET /users
   findAll(@Query('role') role?: 'INTERN' | 'MANAGER' | 'ADMIN') {
@@ -41,7 +41,7 @@ export class UsersController {
 
   @Get(':id') //GET /users/:id
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(Number(id));
+    return this.usersService.findOne(+id);
   }
 
   @Post() // Post /user
@@ -51,12 +51,11 @@ export class UsersController {
 
   @Patch(':id') // Patch /user
   update(@Param('id') id: string, @Body() user: UserInter) {
-    return this.usersService.update(Number(id), user)
+    return this.usersService.update(+id, user);
   }
 
   @Delete(':id') //Delete /users/:id
   delete(@Param('id') id: string) {
-    return this.usersService.delete(Number(id))
+    return this.usersService.delete(+id);
   }
-
 }
