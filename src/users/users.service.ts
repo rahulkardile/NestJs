@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/types/API_Data';
-import { users } from 'src/utils/UserData';
+import { UserInter } from 'src/types/user';
 
 @Injectable()
 export class UsersService {
@@ -72,17 +71,14 @@ export class UsersService {
     return user;
   }
 
-  create(user: {
-    name: string;
-    email: string;
-    role: 'INTERN' | 'MANAGER' | 'ADMIN';
-  }) {
+  create(user: UserInter ) {
     const highestId = [...this.users].sort((a, b) => (b.id = a.id));
     const newUser = {
       id: highestId[0].id + 1,
       ...user,
     };
     this.users.push(newUser);
+    return user;
   }
 
   update(
@@ -97,7 +93,15 @@ export class UsersService {
       if (i.id === id) {
         return { ...i, ...updateUser };
       }
+      return i;
     });
+
+    return this.findOne(id);
   }
-  
+
+  delete(id: number) {
+    const removeUser = this.findOne(id);
+    this.users = this.users.filter((user) => user.id !== id);
+    return removeUser
+  }
 }

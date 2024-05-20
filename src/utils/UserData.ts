@@ -83,6 +83,5 @@ const userJSON =  [
     }
   ]
 
-export const Data = JSON.parse(userJSON);
 
 

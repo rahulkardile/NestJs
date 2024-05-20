@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
 export interface UserInter {
     name: string,
     email: string,
-    password: string,
+    role: 'INTERN' | 'MANAGER' | 'ADMIN';
+    
 }
