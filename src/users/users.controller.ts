@@ -9,9 +9,11 @@ import {
   Patch,
   Post,
   Query,
+  ValidationPipe,
 } from '@nestjs/common';
-import { UserInter } from 'src/types/user';
 import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user-dto';
+import { UpdateUserDto } from './dto/update-user-dto';
 
 @Controller('users')
 export class UsersController {
@@ -46,12 +48,12 @@ export class UsersController {
   }
 
   @Post() // Post /user
-  create(@Body() user: UserInter) {
+  create(@Body(ValidationPipe) user: CreateUserDto) {
     return this.usersService.create(user);
   }
 
   @Patch(':id') // Patch /user
-  update(@Param('id', ParseIntPipe) id: number, @Body() user: UserInter) {
+  update(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) user: UpdateUserDto) {
     return this.usersService.update(id, user);
   }
 
