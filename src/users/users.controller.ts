@@ -48,13 +48,13 @@ export class UsersController {
   }
 
   @Post() // Post /user
-  create(@Body(ValidationPipe) user: CreateUserDto) {
-    return this.usersService.create(user);
+  create(@Body(ValidationPipe) createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @Patch(':id') // Patch /user
-  update(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) user: UpdateUserDto) {
-    return this.usersService.update(id, user);
+  update(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) updateUserDto: UpdateUserDto) {
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id') //Delete /users/:id
